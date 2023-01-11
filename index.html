@@ -21,15 +21,20 @@
             git add {FILENAME}<br>
             git add . <br>
             git commit -m "message" <br>
-            git status <br>
-            git diff {FILENAME} <br>
+            git status - show git statuses<br>
+            git diff {FILENAME} - show {filename} diffs<br>
             git checkout {FILENAME}  - (reverts file to previous commit)<br>
-            git log
+            git checkout {branch name}  - (sets local files to latest branch commit)<br>
+            git log - show log of commits <br>
+            git branch {branch name} - create new branch <br>
+            git branch - show branches
+            git merge '{branch name}' - merges {branch name} into current checked-out branch
         </p>
-        <h2>github (??)</h2>
+        <h2>github (untested - using github desktop)</h2>
         <p class="code">
-            git remote add origin https://github.com/LittleFuryBugs/{repository name}.git <br>
+            git remote add origin https://github.com/{user}/{repository name}.git <br>
             git push -u origin main <br>
+            git clone https://github.com/{user}/{repository name}.git
         </p>
 
         <h2>VS Code</h2>
