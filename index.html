@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,43 +8,88 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <hr>
     <div>
-        <h1>terminal commands</h1>
-        <h2>basic unix</h2>
+        <h2>terminal commands</h2>
+        <h3>basic unix</h3>
         <a href="https://mally.stanford.edu/~sr/computing/basic-unix.html">https://mally.stanford.edu/~sr/computing/basic-unix.html</a>
-        <h3>commonly used:</h3>
-        <p class="code">touch index.html app.js style.css</p>
+        <h4>commonly used:</h4>
+        <p class="code">
+            mkdir {foldername} <br>
+            cd {foldername} <br>
+            cd .. <span class="comment">go back one dir level</span><br> 
+            touch index.html app.js style.css <br>
+        </p>
+        <h5>node, npm, express</h5>
+        <p class="code">
+            npm init <br>
+            npm i express body-parser
+        </p>
 
-        <h2>git</h2>
+        <h3>git</h3>
         <p class="code">
             git init <br>
             git add {FILENAME}<br>
             git add . <br>
             git commit -m "message" <br>
-            git status - show git statuses<br>
-            git diff {FILENAME} - show {filename} diffs<br>
-            git checkout {FILENAME}  - (reverts file to previous commit)<br>
-            git checkout {branch name}  - (sets local files to latest branch commit)<br>
-            git log - show log of commits <br>
-            git branch {branch name} - create new branch <br>
-            git branch - show branches
-            git merge '{branch name}' - merges {branch name} into current checked-out branch
+            git status <span class="comment">show git statuses</span><br>
+            git diff {FILENAME} <span class="comment">show {filename} diffs</span><br>
+            git checkout {FILENAME}  <span class="comment">(reverts file to previous commit)</span><br>
+            git checkout {branch name}  <span class="comment">(sets local files to latest branch commit)</span><br>
+            git log <span class="comment">show log of commits</span> <br>
+            git branch {branch name} <span class="comment">create new branch</span><br>
+            git branch <span class="comment">show branches</span> <br>
+            git merge '{branch name}' <span class="comment">merges {branch name} into current checked-out branch</span>
         </p>
-        <h2>github (untested - using github desktop)</h2>
+        <h3>github (untested - using github desktop)</h3>
         <p class="code">
             git remote add origin https://github.com/{user}/{repository name}.git <br>
             git push -u origin main <br>
             git clone https://github.com/{user}/{repository name}.git
         </p>
 
-        <h2>VS Code</h2>
+        <h3>VS Code</h3>
         <p class="code">
             code file.txt <br>
-            code .
+            code . <span class="comment">opens the current directory in vscode</span>
         </p>
     </div>
     <hr>
+    <h2>Express</h2>
+    <h4>basic starter code: app.js</h4>
+    <p class="code">
+        const express = require('express'); <br>
+        const bodyParser = require('body-parser'); <br>
+        <br>
+        const app = express(); <br>
+        app.use(bodyParser.urlencoded({extended: true})); <br>
+        app.use(express.static("public")); <span class="comment">allows ejs access to static files (e.g. css files) in the "public" folder</span><br>
+        <br>
+        app.get("/", function (req, res) { <br>
+            &nbsp; console.log(req.ip + " - " + __dirname); <br>
+            &nbsp; res.send("Hello"); <br>
+        }); <br>
+        <br>
+        app.listen(3000, function () { <br>
+            &nbsp; console.log("server started on port 3000") <br>
+        }); <br>
+        <br>
+    </p>
+    <p class="code">
+        app.post("/", function(req, res){ <br>
+            &nbsp; console.log(req.body); <br>
+        }); <span class="comment">for html forms with action "post"</span>
+    </p>
+    <hr>
+    <h2>Section 22: EJS</h2>
+    <a href="https://ejs.co">EJS Website</a>
+    <ul>
+        <li>Allows a script to pass variables into HTML code. To setup, create a "{filename}.ejs" in a "views" folder. Include <code>app.set('view engine', 'ejs');</code> in the express.js codebase. 
+            In the .ejs file (same as an HTML file), use <code><%= htmlVARNAME %></code> as the holder to pass the htmlVARNAME into. In the express.js codebase, 
+            include <code>res.render("list", {htmlVARNAME: jsVARNAME, ...});</code>
+        </li>
+        <li>Use <code><% {if, for, ...etc} %></code> in the HTML to run control-flow scriptlets</li>
+
+    </ul>
     
     <script src="app.js"></script>
 </body>
