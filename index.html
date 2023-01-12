@@ -11,17 +11,17 @@
     <div>
         <h2>terminal commands</h2>
         <h3>basic unix</h3>
-        <a href="https://mally.stanford.edu/~sr/computing/basic-unix.html">https://mally.stanford.edu/~sr/computing/basic-unix.html</a>
+        <a href="https://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener noreferrer">https://mally.stanford.edu/~sr/computing/basic-unix.html</a>
         <h4>commonly used:</h4>
         <p class="code">
             mkdir {foldername} <br>
             cd {foldername} <br>
             cd .. <span class="comment">go back one dir level</span><br> 
-            touch index.html app.js style.css <br>
+            touch index.html index.js style.css <br>
         </p>
         <h5>node, npm, express</h5>
         <p class="code">
-            npm init <br>
+            npm init {-y} <span class="comment">'-y' automatically uses all the default values</span><br>
             npm i express body-parser
         </p>
 
@@ -81,7 +81,7 @@
     </p>
     <hr>
     <h2>Section 22: EJS</h2>
-    <a href="https://ejs.co">EJS Website</a>
+    <a href="https://ejs.co" target="_blank" rel="noopener noreferrer">EJS Website</a>
     <ul>
         <li>Allows a script to pass variables into HTML code. To setup, create a "{filename}.ejs" in a "views" folder. Include <code>app.set('view engine', 'ejs');</code> in the express.js codebase. 
             In the .ejs file (same as an HTML file), use <code><%= htmlVARNAME %></code> as the holder to pass the htmlVARNAME into. In the express.js codebase, 
@@ -90,7 +90,39 @@
         <li>Use <code><% {if, for, ...etc} %></code> in the HTML to run control-flow scriptlets</li>
 
     </ul>
-    
+    <hr>
+    <h2>MongoDB & Mongoose</h2>
+        <a href="https://www.mongodb.com/docs/manual/" target="_blank" rel="noopener noreferrer">MongoDB Manual</a><br>
+        <a href="https://www.mongodb.com/docs/drivers/" target="_blank" rel="noopener noreferrer">MongoDB Drivers Manual (for working with applications like node)</a>
+        <p class="code">
+            mongo <span class="comment">opens mongo shell</span><br>
+            show dbs <span class="comment">shows all the databases on the server</span><br>
+            use {db name} <span class="comment">opens the db for additional commands</span><br>
+            show collections <span class="comment">shows the collections within a db</span><br>
+        </p>
+        <p class="code">
+            mongod <span class="comment">runs/spins up mongo server</span>
+        </p>
+        <h3>Native MongoDB & Node.js</h3>
+        <p class="code">
+            npm i mongodb<span class="comment">installs the mongodb drivers into the node modules for working with mongodb in node</span><br>
+        </p>
+        <p class="code">
+            const MongoClient = require('mongodb').MongoClient;<br>
+            const assert = require('assert');<br>
+            const url = 'mongodb://{url}';<span class="comment">server connection url (e.g. "//localhost:27017")</span><br>
+            const dbName = {dbname};<br>
+            const client = new MongoClient(url, {useNewUrlParser: true});<br>
+            client.connect(function(err) {  <span class="comment">uses the connect method to connect to the server</span><br>
+                &nbsp; assert.equal(null, err);<br>
+                &nbsp; console.log("Successfully connected to server");<br>
+                &nbsp; const db = client.db(dbName);<br>
+                &nbsp; client.close();<br>
+            });
+        </p>
+    <footer>
+
+    </footer>
     <script src="app.js"></script>
 </body>
 </html>
