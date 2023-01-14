@@ -25,6 +25,11 @@ h1, h2, h3, h4, h5, h6 {
     margin-block: .3em;
 }
 
+h2 {
+    margin-left: .5rem;
+    color: #ff0;
+}
+
 hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -47,6 +52,11 @@ code {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+p {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
 }
 
 p.code {

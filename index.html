@@ -11,7 +11,7 @@
     <div>
         <h2>terminal commands</h2>
         <h3>basic unix</h3>
-        <a href="https://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener noreferrer">https://mally.stanford.edu/~sr/computing/basic-unix.html</a>
+        <a href="https://mally.stanford.edu/~sr/computing/basic-unix.html">https://mally.stanford.edu/~sr/computing/basic-unix.html</a>
         <h4>commonly used:</h4>
         <p class="code">
             mkdir {foldername} <br>
@@ -19,7 +19,7 @@
             cd .. <span class="comment">go back one dir level</span><br> 
             touch index.html index.js style.css <br>
         </p>
-        <h5>node, npm, express</h5>
+        <h3>node, npm, express</h3>
         <p class="code">
             npm init {-y} <span class="comment">'-y' automatically uses all the default values</span><br>
             npm i express body-parser
@@ -54,6 +54,51 @@
         </p>
     </div>
     <hr>
+
+    <!-- react -->
+
+    <h2>React.js</h2>
+    <a href="https://reactjs.org/docs/getting-started.html">React Docs</a> <br>
+    <a href="https://codesandbox.io/s/new?file=/src/index.js">React Sandbox Webapp</a>
+    <ul>
+        <li>JSX allows the insertion of js expressions (but not statements) into HTML with {}, for example <code>&lt;h1&gt;Hello {name}, your lucky number is {Math.floor(Math.random()*10)}&lt;/h1&gt;</code></li>
+        <li>Inline styles with JSX. You must pass the styles as JSX, not CSS. Example:</li>
+        <p class="code">
+            customStyle = {<br>
+                &nbsp;color: "white",<span class="comment">commas, not semicolons because these are JS objects. attributes are not strings, values are strings</span><br>
+                &nbsp;backgroundColor: "black"<span class="comment">attributes are camelCase (JSX), not kebab-case (CSS)</span><br>
+            }<br>
+            root.render(&lth1 style={customStyle}&gtHello world&lt/h1&gt);
+        </p>
+    </ul>
+    <h3>React Components</h3>
+    <p>You can create you own components by creating them as functions, then calling them like HTML elements e.g.<code>&lt;MyComponent /&gt;</code> or <code>&lt;MyComponent&gt; &lt/MyComponent&gt;</code></p>
+    <p class="code">
+        function Heading() { <br>
+            &nbsp; return &lt;h1&gt;Hello World&lt;/h1&gt;;<br>
+        };<br>
+        root.render(&ltHeading /&gt);
+    </p>
+    <p>Or, as separate files:</p>
+    <p class="code">
+        <span class="comment">file: heading.jsx</span><br>
+        import React from "react";<span class="comment">needs to import react, since this is a jsx file</span><br>
+        function Heading() { <br>
+            &nbsp; return &lt;h1&gt;Hello World&lt;/h1&gt;;<br>
+        };<br>
+        export default Heading;
+    </p>
+    <p class="code">
+        <span class="comment">file: index.js or app.jsx</span><br>
+        import Heading from "./Heading.jsx";<span class="comment">".jsx" is not necessary, sometimes it will just be "./Heading"</span><br>
+        root.render(&ltHeading /&gt);
+    </p>
+    <p class="code" id="test">
+        
+    </p>
+    <hr>
+    <!-- express -->
+
     <h2>Express</h2>
     <h4>basic starter code: app.js</h4>
     <p class="code">
@@ -81,7 +126,7 @@
     </p>
     <hr>
     <h2>Section 22: EJS</h2>
-    <a href="https://ejs.co" target="_blank" rel="noopener noreferrer">EJS Website</a>
+    <a href="https://ejs.co" target="_blank">EJS Website</a>
     <ul>
         <li>Allows a script to pass variables into HTML code. To setup, create a "{filename}.ejs" in a "views" folder. Include <code>app.set('view engine', 'ejs');</code> in the express.js codebase. 
             In the .ejs file (same as an HTML file), use <code><%= htmlVARNAME %></code> as the holder to pass the htmlVARNAME into. In the express.js codebase, 
@@ -92,8 +137,8 @@
     </ul>
     <hr>
     <h2>MongoDB & Mongoose</h2>
-        <a href="https://www.mongodb.com/docs/manual/" target="_blank" rel="noopener noreferrer">MongoDB Manual</a><br>
-        <a href="https://www.mongodb.com/docs/drivers/" target="_blank" rel="noopener noreferrer">MongoDB Drivers Manual (for working with applications like node)</a>
+        <a href="https://www.mongodb.com/docs/manual/">MongoDB Manual</a><br>
+        <a href="https://www.mongodb.com/docs/drivers/">MongoDB Drivers Manual (for working with applications like node)</a>
         <p class="code">
             mongo <span class="comment">opens mongo shell</span><br>
             show dbs <span class="comment">shows all the databases on the server</span><br>
@@ -120,9 +165,21 @@
                 &nbsp; client.close();<br>
             });
         </p>
+    <hr>
+    <h2>Authentication & Security</h2>
+        <ul>
+            <li>Database encryption: mongoose-encryption</li>
+            <li>Environment variables: dotenv</li>
+            <li>Hashing: md5</li>
+            <li>Hash + salt: bcrypt</li>
+            <li>Cookies/Sessions: passport.js <code>npm i passport passport-local passport-local-mongoose express-session</code></li>
+            <li>OAuth: passport/google oauth <code>npm i passport-google-0auth20</code></li>
+        </ul>
     <footer>
 
     </footer>
-    <script src="app.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
