@@ -71,3 +71,7 @@ p.code {
     font-size: .8rem;
     background-color: #222;
 }
+
+p.terminal, code.terminal {
+    background-color: #000;
+}

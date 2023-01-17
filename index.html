@@ -13,20 +13,20 @@
         <h3>basic unix</h3>
         <a href="https://mally.stanford.edu/~sr/computing/basic-unix.html">https://mally.stanford.edu/~sr/computing/basic-unix.html</a>
         <h4>commonly used:</h4>
-        <p class="code">
+        <p class="code terminal">
             mkdir {foldername} <br>
             cd {foldername} <br>
             cd .. <span class="comment">go back one dir level</span><br> 
             touch index.html index.js style.css <br>
         </p>
         <h3>node, npm, express</h3>
-        <p class="code">
+        <p class="code terminal">
             npm init {-y} <span class="comment">'-y' automatically uses all the default values</span><br>
             npm i express body-parser
         </p>
 
         <h3>git</h3>
-        <p class="code">
+        <p class="code terminal">
             git init <br>
             git add {FILENAME}<br>
             git add . <br>
@@ -41,14 +41,14 @@
             git merge '{branch name}' <span class="comment">merges {branch name} into current checked-out branch</span>
         </p>
         <h3>github (untested - using github desktop)</h3>
-        <p class="code">
+        <p class="code terminal">
             git remote add origin https://github.com/{user}/{repository name}.git <br>
             git push -u origin main <br>
             git clone https://github.com/{user}/{repository name}.git
         </p>
 
         <h3>VS Code</h3>
-        <p class="code">
+        <p class="code terminal">
             code file.txt <br>
             code . <span class="comment">opens the current directory in vscode</span>
         </p>
@@ -97,6 +97,32 @@
         
     </p>
     <hr>
+
+    <!-- Other JS -->
+    <h2>Other JS functionality</h2>
+    <h4>import/export and modules</h4>
+    <p class="code">
+        <span class="comment">maths.js</span><br>
+        const pi = 3.14; <br>
+        function doublePi() { <br>
+            return pi*2; <br>
+        } <br>
+        function triplePi() { <br>
+            return pi*2; <br>
+        } <br>
+        export default pi; <span class="comment">determines the defualt export from this module</span><br>
+        export {doublePi, triplePi}; <span class="comment">defines other exports</span><br>
+    </p>
+    <p class="code">
+        import pi_val, {doublePi, triplePi} from "./math.js"; <span class="comment">the first one is the default export, and can be renamed anything in this file.</span><br>
+        console.log("pi is equal to " + pi_val + ". doublepi is equal to " + doubplePi() + ". triplepi is equal to " + triplePi());
+    </p>
+    <p class="code">
+        import * as maths from "./math.js"; <span class="comment">imports everything from the module as an object, so variables/functions will need to be called on the object</span><br>
+        console.log("pi is equal to " + maths.default + ". doublepi is equal to " + maths.doublePi() + ". triplepi is equal to " + maths.triplePi());
+    </p>
+    <hr>
+
     <!-- express -->
 
     <h2>Express</h2>
@@ -125,6 +151,8 @@
         }); <span class="comment">for html forms with action "post"</span>
     </p>
     <hr>
+    <!-- ejs -->
+
     <h2>Section 22: EJS</h2>
     <a href="https://ejs.co" target="_blank">EJS Website</a>
     <ul>
@@ -139,17 +167,17 @@
     <h2>MongoDB & Mongoose</h2>
         <a href="https://www.mongodb.com/docs/manual/">MongoDB Manual</a><br>
         <a href="https://www.mongodb.com/docs/drivers/">MongoDB Drivers Manual (for working with applications like node)</a>
-        <p class="code">
+        <p class="code terminal">
             mongo <span class="comment">opens mongo shell</span><br>
             show dbs <span class="comment">shows all the databases on the server</span><br>
             use {db name} <span class="comment">opens the db for additional commands</span><br>
             show collections <span class="comment">shows the collections within a db</span><br>
         </p>
-        <p class="code">
+        <p class="code terminal">
             mongod <span class="comment">runs/spins up mongo server</span>
         </p>
         <h3>Native MongoDB & Node.js</h3>
-        <p class="code">
+        <p class="code terminal">
             npm i mongodb<span class="comment">installs the mongodb drivers into the node modules for working with mongodb in node</span><br>
         </p>
         <p class="code">
