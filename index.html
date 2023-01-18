@@ -70,6 +70,13 @@
             }<br>
             root.render(&lth1 style={customStyle}&gtHello world&lt/h1&gt);
         </p>
+        <li>Note, jsx does not use "class" for HTML element classes, it uses "className"</li>
+        <p class="code">
+            .title { color: red } <span class="comment">the class in the style.css</span>
+        </p>
+        <p class="code">
+            root.render(&lt;h1 className="title"&gt;Hello world&lt;/h1&gt;) <span class="comment">in the react script, refers to the "title" class as className</span>
+        </p>
     </ul>
     <h3>React Components</h3>
     <p>You can create you own components by creating them as functions, then calling them like HTML elements e.g.<code>&lt;MyComponent /&gt;</code> or <code>&lt;MyComponent&gt; &lt/MyComponent&gt;</code></p>
@@ -93,8 +100,51 @@
         import Heading from "./Heading.jsx";<span class="comment">".jsx" is not necessary, sometimes it will just be "./Heading"</span><br>
         root.render(&ltHeading /&gt);
     </p>
-    <p class="code" id="test">
-        
+    <h3>React Props (properties)</h3>
+    <p>You can add custom properties to react components by passing them in as properties</p>
+    <p class="code">
+        function Heading(props) { <span class="comment">props is an input to the function, it is a object with various properties</span><br>
+            &nbsp; return &lt;h1&gt;{props.greeting} {props.place}&lt;/h1&gt;; <span class="comment">the .place property of the props object is defined below. since it is jsx, not html, you must use {}</span><br>
+        };<br>
+        root.render(&ltHeading greeting="Hello" place="mars"/&gt); <span class="comment"> renders: "Hello mars"</span>
+    </p>
+    <h3>React Prop Mapping</h3>
+    <p>Instead of many repeated components in the render() function, each with their own inline props, you can map from a separate array of objects that includes all the details</p>
+    <p class="code">
+        const greetingDb = [<br>
+        {<br>
+            &nbsp; id = 1, <span class="comment">id will be used as the unique key value (below)</span><br>
+            &nbsp; greeting = "hello",<br>
+            &nbsp; place = "mars"<br>
+        },<br>
+        {<br>
+            &nbsp; id = 2,<br>
+            &nbsp; greeting = "greetings",<br>
+            &nbsp; place = "saturn"<br>
+        }];<br>
+        export default greetingDb; <span class="comment">exports the array of objects. this file would be called greetingDb.js</span>
+    </p>
+    <p class="code">
+        import React from "react"; import Heading from "./Heading"; <span class="comment">hypothetical Heading component as if it were the same as above</span> import greetingDb from "./greetingDb"; <br>
+        function createGreeting(greetingData) { <br>
+            &nbsp; return &lt;Heading key="greetingData.id" <span class="comment">the "key" (exact spelling) is necessary for react to render multiple copies of the same type of component. it must be unique for each object</span> <br>
+            &nbsp; &nbsp; greeting="greetingData.greeting" place="greetingData.place" /&gt; <br>
+        } <br>
+        function App() { <br>
+            &nbsp; return ( <br>
+            &nbsp; &nbsp; {greetingDb.map(createGreeting)} <span class="comment">the .map function takes a function as a parameter, and loops through the array of objects. it returns a new array, based on the input array and the functions return</span> <br>
+            &nbsp; ); <br>
+        } <br>
+        export default App; <span class="comment">the index.js will import the &lt;App /&gt; component from this file (App.js)</span>
+    </p>
+    <h3>Conditional Rendering with &&</h3>
+    <p>in JS, if condition1 is false, then condition2 in the expression (condition1 && condition2) will not be evaluated. you can use this behavior to render components conditionally with minimal typing</p>
+    <p class="code">
+        root.render({condition && &lt;App /&gt;}); <span class="comment">this will only render the App module if the condition is true</span>
+    </p>
+    <h3>State Hooks</h3>
+    <p><a href="https://reactjs.org/docs/hooks-state.html">React Docs</a> Hooks allow you to update elements without reloading the page. 
+        The <code>useState(initialValue, updateFunction)</code> returns an array of the initial value and the function that is used to update the value. You would call the <code>updateFunction(newValue)</code> to set a new value
     </p>
     <hr>
 
@@ -105,21 +155,59 @@
         <span class="comment">maths.js</span><br>
         const pi = 3.14; <br>
         function doublePi() { <br>
-            return pi*2; <br>
+            &nbsp; return pi*2; <br>
         } <br>
         function triplePi() { <br>
-            return pi*2; <br>
+            &nbsp; return pi*2; <br>
         } <br>
         export default pi; <span class="comment">determines the defualt export from this module</span><br>
         export {doublePi, triplePi}; <span class="comment">defines other exports</span><br>
     </p>
     <p class="code">
-        import pi_val, {doublePi, triplePi} from "./math.js"; <span class="comment">the first one is the default export, and can be renamed anything in this file.</span><br>
+        import pi_val, {doublePi, triplePi} from "./maths.js"; <span class="comment">the first one is the default export, and can be renamed anything in this file.</span><br>
         console.log("pi is equal to " + pi_val + ". doublepi is equal to " + doubplePi() + ". triplepi is equal to " + triplePi());
     </p>
     <p class="code">
-        import * as maths from "./math.js"; <span class="comment">imports everything from the module as an object, so variables/functions will need to be called on the object</span><br>
+        import * as maths from "./maths.js"; <span class="comment">imports everything from the module as an object, so variables/functions will need to be called on the object</span><br>
         console.log("pi is equal to " + maths.default + ". doublepi is equal to " + maths.doublePi() + ". triplepi is equal to " + maths.triplePi());
+    </p>
+    <h4>Array functions</h4>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">Map MDN</a> 
+            Map creates a new array with the results of a provided function on every element in the calling array
+        </li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Filter MDN</a> 
+            The filter() method creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+        </li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">Reduce MDN</a> 
+            Reduce returns a single value after looping through each element in the array. 
+        </li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">Find MDN</a> 
+            Finds the first value (and stops at that point) that matches the conditions. Returns the value
+        </li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">Find Index MDN</a> 
+            Finds the first value (and stops at that point) that matches the conditions. Returns the index of that value.
+        </li>
+    </ul>
+    <h4>Arrow functions (fat arrow)</h4>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#arrow_functions">MDN Arrow Functions</a> Another way to write a function in javascript, arrow functions are always anonymous</p>
+    <h4>Conditional (ternary) operator</h4>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">MDN</a> Simplified if/then statement. the conditional operator is an expression, not a statement</p>
+    <p class="code">if (condition) {return truecondition} else {return falsecondition} <br>
+        condition ? truecondition : falsecondition <span class="comment">these two lines are equivalent</span>
+    </p>
+    <p class="code">if (condition1) {return val1} else if (condition2) {return val2} else if (condition3) {return val3} else {return val4} <br>
+        condition1 ? val1 : condition2 ? val2 : condition3 ? val3 : val4  <span class="comment">these two lines are equivalent</span>
+    </p>
+    <h4>Destructuring</h4>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">MDN</a> ES6+ allows unpacking items from an array or an object to give names to each element. This makes it so referencing the elements in an array is more clear than using indexes</p>
+    <p class="code">
+        var x = [1,2,3,4,5]; <span class="comment">instead of this declaration...</span><br>
+        console.log(x[0]); <span class="comment">x[0] might be hard to understand without context</span><br>
+    </p>
+    <p class="code">
+        var [val1, val2, val3] = [1,2,3]; <span class="comment">...use this declaration</span><br>
+        console.log(val1); <span class="comment">you can give a more descriptive name to val1, so referencing it later on is more clear</span>
     </p>
     <hr>
 
