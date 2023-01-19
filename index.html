@@ -103,7 +103,7 @@
     <h3>React Props (properties)</h3>
     <p>You can add custom properties to react components by passing them in as properties</p>
     <p class="code">
-        function Heading(props) { <span class="comment">props is an input to the function, it is a object with various properties</span><br>
+        function Heading(props) { <span class="comment">props is an input to the function, it is a object with various properties. it is immutable (read-only)</span><br>
             &nbsp; return &lt;h1&gt;{props.greeting} {props.place}&lt;/h1&gt;; <span class="comment">the .place property of the props object is defined below. since it is jsx, not html, you must use {}</span><br>
         };<br>
         root.render(&ltHeading greeting="Hello" place="mars"/&gt); <span class="comment"> renders: "Hello mars"</span>
@@ -137,13 +137,19 @@
         } <br>
         export default App; <span class="comment">the index.js will import the &lt;App /&gt; component from this file (App.js)</span>
     </p>
-    <h3>Conditional Rendering with &&</h3>
-    <p>in JS, if condition1 is false, then condition2 in the expression (condition1 && condition2) will not be evaluated. you can use this behavior to render components conditionally with minimal typing</p>
+    <h3>Conditional Rendering</h3>
+    <p>You can use the conditional operator in JSX (because it is an expression not a statement) to conditionally render. Also, in JS, if condition1 is false, then condition2 in the expression (condition1 && condition2) will not be evaluated. 
+        you can use this behavior to render components conditionally with minimal typing
+    </p>
+    <p class="code">
+        root.render({condition ? &lt;App /&gt; : null}); <span class="comment">if condition is true, this will render app, otherwise null</span>
+    </p>
     <p class="code">
         root.render({condition && &lt;App /&gt;}); <span class="comment">this will only render the App module if the condition is true</span>
     </p>
     <h3>State Hooks</h3>
-    <p><a href="https://reactjs.org/docs/hooks-state.html">React Docs</a> Hooks allow you to update elements without reloading the page. 
+    <p>
+        <a href="https://reactjs.org/docs/hooks-state.html">React Docs</a> Hooks allow you to update elements without reloading the page. 
         The <code>useState(initialValue, updateFunction)</code> returns an array of the initial value and the function that is used to update the value. You would call the <code>updateFunction(newValue)</code> to set a new value
     </p>
     <hr>
@@ -208,6 +214,20 @@
     <p class="code">
         var [val1, val2, val3] = [1,2,3]; <span class="comment">...use this declaration</span><br>
         console.log(val1); <span class="comment">you can give a more descriptive name to val1, so referencing it later on is more clear</span>
+    </p>
+    <h4>Spread Operator</h4>
+    <p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">MDN Docs</a>
+        The spread operator easily expands an array or object into a set for each item in the array/object;
+    </p>
+    <p class="code">
+        let evens = [2,4,6]; <br>
+        let odds = [1,3,5]; <br>
+        let nums = [0, ...evens, ...odds]; <span class="comment">this appends all the items in evens and odds to the array</span>
+    </p>
+    <p class="code">
+        let name = {fname: "James", lname: "Bond"}; <br>
+        let user = {...fname, userid: 1}; <span class="comment">this inserts each item in the name object as individual objects in the user object</span>
     </p>
     <hr>
 
